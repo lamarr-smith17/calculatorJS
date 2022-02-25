@@ -5,5 +5,12 @@
 
 body {
     display: flex;
+    justify-content: center;
+    align-content: center;
     background-color: #A45E7E;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
 }
