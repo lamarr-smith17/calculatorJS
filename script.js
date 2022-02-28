@@ -1,3 +1,14 @@
+const btnContainer = document.querySelector('.buttonNums');
+const btnNumSelector = btnContainer.getElementsByClassName('btn');
+const displayText = document.getElementById('displayText');
+// Selects all of the buttons and adds event listeners to them
+for (let i = 0; i < btnNumSelector.length; i++){
+    btnNumSelector.item(i).addEventListener('click', () =>{
+        let displayValue = i;
+        displayText.innerHTML = displayValue;
+    })
+}
+
 const add = (a,b) => {
     return a + b;
 };
@@ -11,7 +22,7 @@ const divide = (a, b) => {
     return a / b;
 }
 
-const operator = (operand, a, b) => {
+const operate = (operand, a, b) => {
     const operation = operand;
     switch(operation){
         case '+':
@@ -31,3 +42,4 @@ const operator = (operand, a, b) => {
     };
  
 }
+

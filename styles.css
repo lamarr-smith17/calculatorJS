@@ -14,3 +14,20 @@ body {
     display: flex;
     flex-direction: column;
 }
+/*Display Container Styles*/
+#displayText {
+    background-color: #FFFFFF;
+}
+.buttonNums {
+    display: grid;
+    padding-top: 1em;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .25em;
+}
+
+.buttonOps {
+    display: grid;
+    padding-top: 1em;
+    grid-template-columns: 1fr;
+    gap: .25em;
+}
