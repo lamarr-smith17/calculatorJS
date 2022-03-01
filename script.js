@@ -4,16 +4,19 @@ const btnOps = document.querySelector('.buttonOps');
 const btnOpsSelector = btnOps.getElementsByClassName('btn');
 const displayText = document.getElementById('displayText');
 
-
+let blank = "";
+let displayV = "";
 // Selects all of the number buttons and adds event listeners to them
 for (let i = 0; i < btnNumSelector.length; i++){
     btnNumSelector.item(i).addEventListener('click', () =>{
-        let newNum = i;
-        displayText.append(newNum)
-        let currentNum= newNum;
-        console.log(currentNum)
+        blank += i; // Adds the number clicked to the blank variable
+        displayV += i; // Adds the number to the display value variable
+        displayText.innerHTML = displayV;
+        return blank;
     })
+
 }
+let blankar = [];
 
 // Selects all of the operators and adds event listeners to them
 for (let o = 0; o < btnOpsSelector.length; o++){
@@ -22,26 +25,38 @@ for (let o = 0; o < btnOpsSelector.length; o++){
         switch(displayValue){
             case 0:
                 displayValue = '+';
+                blank += displayValue; // Adds the operator to the blank variable
+                displayV += displayValue; // Adds the operator to the display value variable
+                displayText.innerHTML = " ";
                 displayText.innerHTML = displayValue;
                 break;
             case 1:
                 displayValue = '-';
+                blank += displayValue;
+                displayV += displayValue;
                 displayText.innerHTML = displayValue;
                 break;
             case 2:
                 displayValue = '*';
+                blank += displayValue;
+                displayV += displayValue;
                 displayText.innerHTML = displayValue;
                 break;
             case 3: 
                 displayValue = '/';
+                blank += displayValue;
+                displayV += displayValue;
                 displayText.innerHTML = displayValue;
                 break;
             case 4:
                 displayValue = '='
-                displayText.innerHTML = sum;
+                blankar.push(blank);
+                console.log(blankar);
                 break;
             case 5:
                 displayText.innerHTML = 0;
+                displayV = "";
+                blank = "";
         }
     })
 }
