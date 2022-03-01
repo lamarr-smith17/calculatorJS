@@ -17,6 +17,7 @@ body {
 /*Display Container Styles*/
 #displayText {
     background-color: #FFFFFF;
+    text-align: end;
 }
 .buttonNums {
     display: grid;

@@ -3,13 +3,15 @@ const btnNumSelector = btnContainer.getElementsByClassName('btn');
 const btnOps = document.querySelector('.buttonOps');
 const btnOpsSelector = btnOps.getElementsByClassName('btn');
 const displayText = document.getElementById('displayText');
-let holdNum = 0;
+
+
 // Selects all of the number buttons and adds event listeners to them
 for (let i = 0; i < btnNumSelector.length; i++){
     btnNumSelector.item(i).addEventListener('click', () =>{
-        let displayValue = i;
-        displayText.innerHTML = displayValue;
-        return holdNum;
+        let newNum = i;
+        displayText.append(newNum)
+        let currentNum= newNum;
+        console.log(currentNum)
     })
 }
 
@@ -20,7 +22,6 @@ for (let o = 0; o < btnOpsSelector.length; o++){
         switch(displayValue){
             case 0:
                 displayValue = '+';
-                operate(displayValue, holdNum, holdNum)
                 displayText.innerHTML = displayValue;
                 break;
             case 1:
@@ -39,9 +40,13 @@ for (let o = 0; o < btnOpsSelector.length; o++){
                 displayValue = '='
                 displayText.innerHTML = sum;
                 break;
+            case 5:
+                displayText.innerHTML = 0;
         }
     })
 }
+
+
 const add = (a,b) => {
     return a + b;
 };
