@@ -14,9 +14,7 @@ for (let i = 0; i < btnNumSelector.length; i++){
         displayText.innerHTML = displayV;
         return blank;
     })
-
 }
-let blankar = [];
 
 // Selects all of the operators and adds event listeners to them
 for (let o = 0; o < btnOpsSelector.length; o++){
@@ -26,32 +24,31 @@ for (let o = 0; o < btnOpsSelector.length; o++){
             case 0:
                 displayValue = '+';
                 blank += displayValue; // Adds the operator to the blank variable
-                displayV += displayValue; // Adds the operator to the display value variable
+                displayV = " "; 
                 displayText.innerHTML = " ";
                 displayText.innerHTML = displayValue;
                 break;
             case 1:
                 displayValue = '-';
                 blank += displayValue;
-                displayV += displayValue;
+                displayV = " "; 
                 displayText.innerHTML = displayValue;
                 break;
             case 2:
                 displayValue = '*';
                 blank += displayValue;
-                displayV += displayValue;
+                displayV = " "; 
                 displayText.innerHTML = displayValue;
                 break;
             case 3: 
                 displayValue = '/';
                 blank += displayValue;
-                displayV += displayValue;
+                displayV = " "; 
                 displayText.innerHTML = displayValue;
                 break;
             case 4:
                 displayValue = '='
-                blankar.push(blank);
-                console.log(blankar);
+                test(blank);
                 break;
             case 5:
                 displayText.innerHTML = 0;
@@ -59,6 +56,15 @@ for (let o = 0; o < btnOpsSelector.length; o++){
                 blank = "";
         }
     })
+}
+
+function test(){
+    for (let i = 0; i < blank.length; i++){
+        let a = parseInt(blank[i]);
+        if (a != parseInt){
+            console.log(blank[i])
+        }
+    }
 }
 
 
@@ -79,7 +85,7 @@ const operate = (operand, a, b) => {
     const operation = operand;
     switch(operation){
         case '+':
-            add(a, b);
+            add(parseInt(a), parseInt(b));
             return add(a,b);
         case '-':
             subtract(a,b);
