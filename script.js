@@ -5,7 +5,7 @@ const btnOpsSelector = btnOps.getElementsByClassName('btn');
 const displayText = document.getElementById('displayText');
 let blank = [];
 let displayV = "";
-let runTT = 0; // Running total to keep track of sum
+let runT = 0;
 
 // Selects all of the number buttons and adds event listeners to them
 function btnSelector (){
@@ -27,11 +27,9 @@ for (let o = 0; o < btnOpsSelector.length; o++){
             case 0:
                 displayValue = '+';
                 blank += displayValue; // Adds the operator to the blank variable
-                
                 displayV = " "; 
                 displayText.innerHTML = " ";
                 displayText.innerHTML = displayValue;
-                // let runT = test(blank);
                 break;
             case 1:
                 displayValue = '-';
@@ -58,16 +56,12 @@ for (let o = 0; o < btnOpsSelector.length; o++){
                 displayText.innerHTML = jj;
                 break;
             case 5:
-                displayText.innerHTML = 0;
-                displayV = "";
-                blank = "";
-                runTT = 0;
+                clear();
         }
     })
 }
 
 function test(){
-    let runT = 0;
     for (let i = 0; i < blank.length; i++){ // Starts the for loop that goes through the length of the string
         if (runT == 0 && blank[i] == '+' || blank[i] == '-' || blank[i]== '*' || blank[i] == '/' ){ // Starting if statement to get the running total its first non-zero value
             let arSlice = parseInt(blank.slice(0, i)); // Makes the left-side of the operator into an int
@@ -93,61 +87,59 @@ function test(){
         if (runT !=0){
             let arSlice = runT;
             let arEnd;
-            
-            for (let j = i+1; j <= blank.length; j++){ // Moves the index to the first right-side value and starts the for loop to get the entire length of the value
+            for (let j = i+1; j <= blank.length; j++){ // Moves the index to the first right-side value
+                
                 if(blank[j] == '+' || blank[j] == '-' || blank[j]== '*' || blank[j] == '/' ){
                     let z = blank[j];
-                    console.log(z)
-                    arEnd = parseInt(blank.slice(z + 1, j)); // Makes the right-side of the operator into an int
-                    console.log(j)
-                    
+                    for (let a = j + 1; a < blank.length; a++){
+                        if(blank[a] == '+' || blank[a] == '-' || blank[a]== '*' || blank[a] == '/' ){
+                        arEnd = parseInt(blank.slice(j+1, a))
+                        console.log(arEnd)
+                        break;
+                        }else{
+                            arEnd = parseInt(blank.slice(j+1));
+                            console.log(arEnd)
+                            break;
+                        }
+                    }
+                    arSlice = runT;
                     let value = operate(z, arSlice, arEnd);
-                    let runT = value;
+                    runT = value;
                     console.log(runT)
-                    return value;
+                    // return value;
                 }
-           
-            }           
+
+            }
+            return runT;
+
         }
 
     }
 }
    
-const add = (a,b) => {
-    return a + b;
-};
-const subtract = (a, b) => {
-    return a - b;
-};
-const multiply = (a, b) => {
-    return a * b;
-}
-const divide = (a, b) => {
-    if (b == 0){
-        displayText.innerHTML = 'Cannot divide by zero! Clear and try again!';
-    }
-    return a / b;
-}
-
-const operate = (operand, a, b) => {
+operate = (operand, a, b) => {
     const operation = operand;
     switch(operation){
         case '+':
-            add(parseInt(a), parseInt(b));
-            return add(a,b);
+            let add = a + b;
+            return add;
         case '-':
-            subtract(a,b);
-            return subtract(a,b);
+            let subtract = a - b;
+            return subtract;
         case '*':
-            multiply(a,b);
-            return multiply(a,b);
+            let multiply = a * b;
+            return multiply;
         case '/':
-            divide(a,b);
-            return divide(a,b);
+            let divide = a / b;
+            return divide;
         default:
             return;
     };
- 
 }
-
+clear = ()=>{
+    displayText.innerHTML = 0;
+    displayV = "";
+    blank = "";
+    runT = 0;
+}
 btnSelector();
