@@ -91,38 +91,23 @@ function test(){
         }
         
         if (runT !=0){
-            
             let arSlice = runT;
-            
             let arEnd;
             
             for (let j = i+1; j <= blank.length; j++){ // Moves the index to the first right-side value and starts the for loop to get the entire length of the value
                 if(blank[j] == '+' || blank[j] == '-' || blank[j]== '*' || blank[j] == '/' ){
-                    arEnd = parseInt(blank.slice(blank[j] + 1, blank.length)); // Makes the right-side of the operator into an int
+                    let z = blank[j];
+                    console.log(z)
+                    arEnd = parseInt(blank.slice(z + 1, j)); // Makes the right-side of the operator into an int
+                    console.log(j)
                     
-                    let value = operate(blank[j], arSlice, arEnd);
-                    runT = value;
-                }
-                if(j == blank.length){
-                    arEnd = parseInt(blank.slice(blank[j] + 1, blank.length));
-                    value = operate(blank[j], arSlice, arEnd);
-                    console.log(blank[j], arSlice, arEnd);
-                    runT = value;
+                    let value = operate(z, arSlice, arEnd);
+                    let runT = value;
+                    console.log(runT)
                     return value;
                 }
-            }
-
-            //     }
-            //     if(j == blank.length){
-            //         let arEnd = parseInt(blank.slice(i + 1));
-            //         let value = operate(j, arSlice, arEnd);
-            //         return value;
-            //     }
-            //     let value = operate(x, arSlice, arEnd);
-            //     runT += value;
-            // }
-            
-            
+           
+            }           
         }
 
     }
@@ -160,7 +145,7 @@ const operate = (operand, a, b) => {
             divide(a,b);
             return divide(a,b);
         default:
-            alert("Invalid operator entered!");
+            return;
     };
  
 }
