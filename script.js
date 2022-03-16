@@ -2,7 +2,8 @@ const btnContainer = document.querySelector('.buttonNums');
 const btnNumSelector = btnContainer.getElementsByClassName('btn');
 const btnOps = document.querySelector('.buttonOps');
 const btnOpsSelector = btnOps.getElementsByClassName('btn');
-const displayText = document.getElementById('displayText');
+const currentDisplay = document.getElementById('currentDisplay');
+const previousDisplay = document.getElementById('previousDisplay');
 let blank = [];
 let displayV = "";
 let runT = 0;
@@ -13,7 +14,7 @@ function btnSelector (){
         btnNumSelector.item(i).addEventListener('click', () =>{
             blank += i; // Adds the number clicked to the blank variable
             displayV += i; // Adds the number to the display value variable
-            displayText.innerHTML = displayV;
+            currentDisplay.innerHTML = displayV;
             return blank;
         })
     }
@@ -28,37 +29,45 @@ for (let o = 0; o < btnOpsSelector.length; o++){
                 displayValue = '+';
                 blank += displayValue; // Adds the operator to the blank variable
                 displayV = " "; 
-                displayText.innerHTML = " ";
-                displayText.innerHTML = displayValue;
+                currentDisplay.innerHTML = " ";
+                currentDisplay.innerHTML = displayValue;
                 break;
             case 1:
                 displayValue = '-';
                 blank += displayValue;
                 displayV = " "; 
-                displayText.innerHTML = displayValue;
+                currentDisplay.innerHTML = displayValue;
                 break;
             case 2:
                 displayValue = '*';
                 blank += displayValue;
                 displayV = " "; 
-                displayText.innerHTML = displayValue;
+                currentDisplay.innerHTML = displayValue;
                 break;
             case 3: 
                 displayValue = '/';
                 blank += displayValue;
                 displayV = " "; 
-                displayText.innerHTML = displayValue;
+                currentDisplay.innerHTML = displayValue;
                 break;
             case 4:
+                if (blank.length == 0){
+                    return;
+                }
                 displayValue = '='
                 let result = test(blank);
                 runT = result;
+                previousDisplay.innerHTML = blank + "=";
                 blank = [];
                 blank += runT;
-                displayText.innerHTML = result;
+                currentDisplay.innerHTML = result;
                 break;
             case 5:
                 clear();
+            case 6:
+                del();
+            default:
+                return;
         }
     })
 }
@@ -155,7 +164,7 @@ operate = (operand, a, b) => {
     };
 }
 clear = ()=>{
-    displayText.innerHTML = 0;
+    currentDisplay.innerHTML = 0;
     displayV = "";
     blank = "";
     runT = 0;
