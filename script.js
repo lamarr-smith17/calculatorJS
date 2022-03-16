@@ -1,5 +1,5 @@
-const btnContainer = document.querySelector('.buttonNums');
-const btnNumSelector = btnContainer.getElementsByClassName('btn');
+const btnContainer = document.querySelectorAll('.buttonNums');
+// const btnNumSelector = btnContainer.getElementsByClassName('btn');
 const btnOps = document.querySelector('.buttonOps');
 const btnOpsSelector = btnOps.getElementsByClassName('btn');
 const currentDisplay = document.getElementById('currentDisplay');
@@ -9,17 +9,24 @@ let displayV = "";
 let runT = 0;
 
 // Selects all of the number buttons and adds event listeners to them
-function btnSelector (){
-    for (let i = 0; i < btnNumSelector.length; i++){
-        btnNumSelector.item(i).addEventListener('click', () =>{
-            blank += i; // Adds the number clicked to the blank variable
-            displayV += i; // Adds the number to the display value variable
-            currentDisplay.innerHTML = displayV;
-            return blank;
-        })
-    }
-}
-
+// function btnSelector (){
+//     for (let i = 0; i < btnNumSelector.length; i++){
+//         btnNumSelector.item(i).addEventListener('click', () =>{
+            // blank += i; // Adds the number clicked to the blank variable
+            // displayV += i; // Adds the number to the display value variable
+//             currentDisplay.innerHTML = displayV;
+//             return blank;
+//         })
+//     }
+// }
+console.log(btnContainer)
+// btnContainer.forEach(button =>{
+//     button.addEventListener('click', ()=>{
+//         console.log(button)
+//         blank += i; // Adds the number clicked to the blank variable
+//         displayV += i; // Adds the number to the display value variable
+//     })
+// })
 // Selects all of the operators and adds event listeners to them
 for (let o = 0; o < btnOpsSelector.length; o++){
     btnOpsSelector.item(o).addEventListener('click', ()=>{
@@ -169,4 +176,4 @@ clear = ()=>{
     blank = "";
     runT = 0;
 }
-btnSelector();
+// btnSelector();
