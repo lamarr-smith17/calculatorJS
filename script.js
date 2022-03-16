@@ -51,9 +51,11 @@ for (let o = 0; o < btnOpsSelector.length; o++){
                 break;
             case 4:
                 displayValue = '='
-                let jj = test(blank);
-                runTT = jj;
-                displayText.innerHTML = jj;
+                let result = test(blank);
+                runT = result;
+                blank = [];
+                blank += runT;
+                displayText.innerHTML = result;
                 break;
             case 5:
                 clear();
@@ -80,40 +82,56 @@ function test(){
                     runT = value;
                     return value;
                 }
-            }
-            
+            } 
         }
-        
-        if (runT !=0){
+
+        if (runT !=0 && blank.length == 1){
             let arSlice = runT;
             let arEnd;
             for (let j = i+1; j <= blank.length; j++){ // Moves the index to the first right-side value
-                
-                if(blank[j] == '+' || blank[j] == '-' || blank[j]== '*' || blank[j] == '/' ){
+                if(blank[j] == '+' || blank[j] == '-' || blank[j]== '*' || blank[j] == '/' ){ 
                     let z = blank[j];
                     for (let a = j + 1; a < blank.length; a++){
-                        if(blank[a] == '+' || blank[a] == '-' || blank[a]== '*' || blank[a] == '/' ){
+                        if(blank[a] == '+' || blank[a] == '-' || blank[a]== '*' || blank[a] == '/' ){ // Finds the next operator, points to the index, and it is then used to find the end
                         arEnd = parseInt(blank.slice(j+1, a))
-                        console.log(arEnd)
                         break;
-                        }else{
+                        } else {
                             arEnd = parseInt(blank.slice(j+1));
-                            console.log(arEnd)
                             break;
                         }
                     }
                     arSlice = runT;
                     let value = operate(z, arSlice, arEnd);
                     runT = value;
-                    console.log(runT)
-                    // return value;
                 }
 
             }
             return runT;
-
         }
 
+        if (runT !=0){
+            let arSlice = runT;
+            let arEnd;
+            for (let j = i+1; j <= blank.length; j++){ // Moves the index to the first right-side value
+                if(blank[j] == '+' || blank[j] == '-' || blank[j]== '*' || blank[j] == '/' ){
+                    let z = blank[j];
+                    for (let a = j + 1; a < blank.length; a++){
+                        if(blank[a] == '+' || blank[a] == '-' || blank[a]== '*' || blank[a] == '/' ){ // Finds the next operator, points to the index, and it is then used to find the end
+                        arEnd = parseInt(blank.slice(j+1, a))
+                        break;
+                        } else {
+                            arEnd = parseInt(blank.slice(j+1));
+                            break;
+                        }
+                    }
+                    arSlice = runT;
+                    let value = operate(z, arSlice, arEnd);
+                    runT = value;
+                }
+
+            }
+            return runT;
+        }
     }
 }
    

@@ -1,13 +1,14 @@
 * {
     padding: 0;
     margin: 0;
+    background-color: #DFF8EB;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-content: center;
-    background-color: #A45E7E;
+    
 }
 
 .container {
@@ -18,6 +19,14 @@ body {
 #displayText {
     background-color: #FFFFFF;
     text-align: end;
+}
+.btn {
+    width: 50px;
+    height: 25px;
+}
+.btn-Container {
+    display: flex;
+    gap: 1em;
 }
 .buttonNums {
     display: grid;
