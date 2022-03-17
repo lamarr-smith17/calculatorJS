@@ -1,7 +1,6 @@
 * {
     padding: 0;
     margin: 0;
-    background-color: #DFF8EB;
     font-family: 'Times New Roman', Times, serif;
     font-weight: normal;
 }
@@ -10,13 +9,15 @@ body {
     display: flex;
     justify-content: center;
     align-content: center;
+    padding: 7%;
+    background: linear-gradient(135deg,#CBFF4D, #6BAA75);
     
 }
 /* Calculator Body*/
 .container {
     display: flex;
     border: 1px solid #000000;
-    height: 50vh;
+    height: auto;
 }
 
 /*Display Container Styles*/
@@ -24,24 +25,86 @@ body {
     background-color: transparent;
     height: 25px;
     text-align: end;
+    color: #FFFFFF;
     font-size: 1rem;
 }
 #currentDisplay {
     background-color: transparent;
     height: 50px;
     text-align: end;
+    color: #FFFFFF;
     font-size: 2rem;
 }
 .displayContainer {
+    background-color: #313131;
     grid-column: span 4;
 }
+
 /* Button Container Styles */
 .btn-Container {
     display: grid;
+    background-color: #313131;
+    gap: .25em;
     grid-template-columns: repeat(4, 100px);
-    grid-template-rows: repeat(5,100px);
+    grid-template-rows: repeat(6,100px);
 }
 .btn {
     font-size: 2rem;
+    border: none;
+    background-color: #E2EBF1;
+    transition: .25s;
+}
+.btn:hover{
+    background-color: #6E98B6;
+    transition: .25s;
+}
+.btn:active{
+    background-color: #E7E2E2;
+    transition: .1s;
+}
+/* Sets the buttons in the grid layout that I want it to be */
+#btn-0 {
+    grid-row-start:2;
+}
+#btn-1 {
+    grid-row-start:2;
+}
+#btn-2 {
+    grid-row-start:2;
+}
+#btn-3 {
+    grid-row-start:3;
+}
+#btn-4 {
+    grid-row-start:3;
+}
+#btn-5 {
+    grid-row-start:3;
+}
+#btn-6 {
+    grid-row-start:4;
+}
+#btn-7 {
+    grid-row-start:4;
+}
+#btn-8 {
+    grid-row-start:4;
+}
+#btn-9 {
+    grid-row-start:5;
+}
+#btn-decimal {
+    grid-row-start:5;
+}
+#btn-delete {
+    grid-row-start:5;
+}
+#btn-equals {
+    grid-column-start:1;
+    grid-column: span 2;
+}
+#btn-clear {
+    grid-column-start:3;
+    grid-column: span 2;
 }
 
