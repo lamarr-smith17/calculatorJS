@@ -1,92 +1,28 @@
 const btnContainer = document.querySelectorAll('.btn');
-// const btnNumSelector = btnContainer.getElementsByClassName('btn');
 const currentDisplay = document.getElementById('currentDisplay');
 const previousDisplay = document.getElementById('previousDisplay');
 let blank = [];
 let displayV = "";
 let runT = 0;
 
-// Selects all of the number buttons and adds event listeners to them
-// function btnSelector (){
-//     for (let i = 0; i < btnNumSelector.length; i++){
-//         btnNumSelector.item(i).addEventListener('click', () =>{
-            // blank += i; // Adds the number clicked to the blank variable
-            // displayV += i; // Adds the number to the display value variable
-//             currentDisplay.innerHTML = displayV;
-//             return blank;
-//         })
-//     }
-// }
 btnContainer.forEach(button =>{
     button.addEventListener('click', ()=>{
-        blank.push(button.innerHTML) // Adds the number clicked to the blank variable
-        displayV += button.innerHTML; // Adds the number to the display value variable
-        console.log(blank)
-        currentDisplay.innerText = blank.join(' ');
-    })
-})
-btnContainer.forEach(operator => {
-    operator.addEventListener('click', () =>{
-        switch(operator){
-            case 4:{
+        switch(button.innerHTML){
+            case '=':
                 let result = test(blank);
-                previousDisplay.innerText = currentDisplay;
+                previousDisplay.innerText = result;
                 currentDisplay.innerText = result;
-            }
-        }
+                break;
+            case 'Clear':
+                clear();
+                break;
+            default:
+                blank += button.innerHTML; // Adds the number clicked to the blank variable
+                displayV += button.innerHTML; // Adds the number to the display value variable
+                currentDisplay.innerText = blank;
+        }        
     })
 })
-// Selects all of the operators and adds event listeners to them
-// for (let o = 0; o < btnOpsSelector.length; o++){
-//     btnOpsSelector.item(o).addEventListener('click', ()=>{
-//         let displayValue = o;
-//         switch(displayValue){
-//             case 0:
-//                 displayValue = '+';
-//                 blank += displayValue; // Adds the operator to the blank variable
-//                 displayV = " "; 
-//                 currentDisplay.innerHTML = " ";
-//                 currentDisplay.innerHTML = displayValue;
-//                 break;
-//             case 1:
-//                 displayValue = '-';
-//                 blank += displayValue;
-//                 displayV = " "; 
-//                 currentDisplay.innerHTML = displayValue;
-//                 break;
-//             case 2:
-//                 displayValue = '*';
-//                 blank += displayValue;
-//                 displayV = " "; 
-//                 currentDisplay.innerHTML = displayValue;
-//                 break;
-//             case 3: 
-//                 displayValue = '/';
-//                 blank += displayValue;
-//                 displayV = " "; 
-//                 currentDisplay.innerHTML = displayValue;
-//                 break;
-//             case 4:
-//                 if (blank.length == 0){
-//                     return;
-//                 }
-//                 displayValue = '='
-//                 let result = test(blank);
-//                 runT = result;
-//                 previousDisplay.innerHTML = blank + "=";
-//                 blank = [];
-//                 blank += runT;
-//                 currentDisplay.innerHTML = result;
-//                 break;
-//             case 5:
-//                 clear();
-//             case 6:
-//                 del();
-//             default:
-//                 return;
-//         }
-//     })
-// }
 
 function test(){
     for (let i = 0; i < blank.length; i++){ // Starts the for loop that goes through the length of the string
@@ -180,9 +116,9 @@ operate = (operand, a, b) => {
     };
 }
 clear = ()=>{
-    currentDisplay.innerHTML = 0;
-    displayV = "";
-    blank = "";
+    previousDisplay.innerText = 0;
+    currentDisplay.innerText = 0;
+    blank = [];
     runT = 0;
 }
 // btnSelector();

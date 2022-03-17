@@ -37,6 +37,7 @@ body {
 }
 .displayContainer {
     background-color: #313131;
+    overflow-wrap: break-word;
     grid-column: span 4;
 }
 
