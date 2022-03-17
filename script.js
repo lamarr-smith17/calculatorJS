@@ -2,29 +2,36 @@ const btnContainer = document.querySelectorAll('.btn');
 const currentDisplay = document.getElementById('currentDisplay');
 const previousDisplay = document.getElementById('previousDisplay');
 let blank = [];
-let displayV = "";
 let runT = 0;
 
 btnContainer.forEach(button =>{
     button.addEventListener('click', ()=>{
         switch(button.innerHTML){
+            // case '.':
+            //     blank += button.innerHTML; // Adds the number clicked to the blank variable
+            //     currentDisplay.innerText = blank;
+            case 'Del':
+                let newBlank = blank.slice(0, blank.length - 1);
+                console.log(newBlank)
+                break;
             case '=':
                 let result = test(blank);
-                previousDisplay.innerText = result;
+                previousDisplay.innerText = blank + ' ' + '=' + ' ' + result;
                 currentDisplay.innerText = result;
+                blank = [];
+                blank += runT;
                 break;
             case 'Clear':
                 clear();
                 break;
             default:
                 blank += button.innerHTML; // Adds the number clicked to the blank variable
-                displayV += button.innerHTML; // Adds the number to the display value variable
                 currentDisplay.innerText = blank;
         }        
     })
 })
 
-function test(){
+test = ()=>{
     for (let i = 0; i < blank.length; i++){ // Starts the for loop that goes through the length of the string
         if (runT == 0 && blank[i] == '+' || blank[i] == '-' || blank[i]== '*' || blank[i] == '/' ){ // Starting if statement to get the running total its first non-zero value
             let arSlice = parseInt(blank.slice(0, i)); // Makes the left-side of the operator into an int
