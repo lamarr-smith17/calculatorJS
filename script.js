@@ -22,7 +22,18 @@ btnContainer.forEach(button =>{
         blank.push(button.innerHTML) // Adds the number clicked to the blank variable
         displayV += button.innerHTML; // Adds the number to the display value variable
         console.log(blank)
-        currentDisplay.innerText = displayV;
+        currentDisplay.innerText = blank.join(' ');
+    })
+})
+btnContainer.forEach(operator => {
+    operator.addEventListener('click', () =>{
+        switch(operator){
+            case 4:{
+                let result = test(blank);
+                previousDisplay.innerText = currentDisplay;
+                currentDisplay.innerText = result;
+            }
+        }
     })
 })
 // Selects all of the operators and adds event listeners to them
