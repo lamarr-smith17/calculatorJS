@@ -4,6 +4,7 @@ const previousDisplay = document.getElementById('previousDisplay');
 let operation = [];
 let runT = 0;
 
+window.addEventListener('keydown', numInput)
 btnContainer.forEach(button =>{
     button.addEventListener('click', ()=>{
         switch(button.innerText){
@@ -19,7 +20,7 @@ btnContainer.forEach(button =>{
                 del(); 
                 break;
             case '=':
-                let result = test(operation);
+                let result = evalute(operation);
                 previousDisplay.innerText = operation + ' ' + '=' + ' ' + result;
                 currentDisplay.innerText = result;
                 operation = [];
@@ -34,23 +35,42 @@ btnContainer.forEach(button =>{
         }        
     })
 })
-
-test = ()=>{
+function numInput(input){
+    if(input.key >= 0 && input.key <= 9){ // Numbers 0-9
+        operation += input.key;
+        currentDisplay.innerText = operation;
+    }
+    if (input.key === '+' || input.key === '-' || input.key === '*' ||input.key === '/'){
+        operation += input.key;
+        currentDisplay.innerText = operation;
+    }
+    if(input.key === 'Backspace'){
+        del();
+    }
+    if(input.key === 'Enter'){
+        let result = evalute(operation);
+            previousDisplay.innerText = operation + ' ' + '=' + ' ' + result;
+            currentDisplay.innerText = result;
+            operation = [];
+            operation += runT;
+    }
+}
+function evalute(){
     for (let i = 0; i < operation.length; i++){ // Starts the for loop that goes through the length of the string
         if (runT == 0 && operation[i] == '+' || operation[i] == '-' || operation[i]== '*' || operation[i] == '/' ){ // Starting if statement to get the running total its first non-zero value
-            let arSlice = parseFloat(operation.slice(0, i)); // Makes the left-side of the operator into an int
+            let opLeft = parseFloat(operation.slice(0, i)); // Makes the left-side of the operator into an int
             let x = operation[i]; // The index of the operator
-            let arEnd; // Sets the right-side variable
+            let opRight; // Sets the right-side variable
             for (let j = i+1; j <= operation.length; j++){ // Moves the index to the first right-side value and starts the for loop to get the entire length of the value
                 if(operation[j] == '+' || operation[j] == '-' || operation[j]== '*' || operation[j] == '/' ){
-                    arEnd = parseFloat(operation.slice(i + 1, j)); // Makes the right-side of the operator into an int
-                    let value = operate(x, arSlice, arEnd);
+                    opRight = parseFloat(operation.slice(i + 1, j)); // Makes the right-side of the operator into an int
+                    let value = operate(x, opLeft, opRight);
                     runT = value;
                     break; // Stops the first operation code if there is more than one operator
                 }
                 if(j == operation.length){ // If the index is equal to the length of the string, return the sum
-                    let arEnd = parseFloat(operation.slice(i + 1));
-                    let value = operate(x, arSlice, arEnd);
+                    let opRight = parseFloat(operation.slice(i + 1));
+                    let value = operate(x, opLeft, opRight);
                     runT = value;
                     return value;
                 }
@@ -58,22 +78,22 @@ test = ()=>{
         }
 
         if (runT !=0 && operation.length == 1){
-            let arSlice = runT;
-            let arEnd;
+            let opLeft = runT;
+            let opRight;
             for (let j = i+1; j <= operation.length; j++){ // Moves the index to the first right-side value
                 if(operation[j] == '+' || operation[j] == '-' || operation[j]== '*' || operation[j] == '/' ){ 
                     let z = operation[j];
                     for (let a = j + 1; a < operation.length; a++){
                         if(operation[a] == '+' || operation[a] == '-' || operation[a]== '*' || operation[a] == '/' ){ // Finds the next operator, points to the index, and it is then used to find the end
-                        arEnd = parseFloat(operation.slice(j+1, a))
+                        opRight = parseFloat(operation.slice(j+1, a))
                         break;
                         } else {
-                            arEnd = parseFloat(operation.slice(j+1));
+                            opRight = parseFloat(operation.slice(j+1));
                             break;
                         }
                     }
-                    arSlice = runT;
-                    let value = operate(z, arSlice, arEnd);
+                    opLeft = runT;
+                    let value = operate(z, opLeft, opRight);
                     runT = value;
                 }
 
@@ -82,22 +102,22 @@ test = ()=>{
         }
 
         if (runT !=0){
-            let arSlice = runT;
-            let arEnd;
+            let opLeft = runT;
+            let opRight;
             for (let j = i+1; j <= operation.length; j++){ // Moves the index to the first right-side value
                 if(operation[j] == '+' || operation[j] == '-' || operation[j]== '*' || operation[j] == '/' ){
                     let z = operation[j];
                     for (let a = j + 1; a < operation.length; a++){
                         if(operation[a] == '+' || operation[a] == '-' || operation[a]== '*' || operation[a] == '/' ){ // Finds the next operator, points to the index, and it is then used to find the end
-                        arEnd = parseFloat(operation.slice(j+1, a))
+                        opRight = parseFloat(operation.slice(j+1, a))
                         break;
                         } else {
-                            arEnd = parseFloat(operation.slice(j+1));
+                            opRight = parseFloat(operation.slice(j+1));
                             break;
                         }
                     }
-                    arSlice = runT;
-                    let value = operate(z, arSlice, arEnd);
+                    opLeft = runT;
+                    let value = operate(z, opLeft, opRight);
                     runT = value;
                 }
 
@@ -107,7 +127,7 @@ test = ()=>{
     }
 }
    
-operate = (operand, a, b) => {
+function operate(operand, a, b){
     switch(operand){
         case '+':
             let add = a + b;
@@ -129,13 +149,13 @@ operate = (operand, a, b) => {
             return;
     };
 }
-clear = ()=>{
+function clear(){
     previousDisplay.innerText = 0;
     currentDisplay.innerText = 0;
     operation = [];
     runT = 0;
 }
-del = ()=>{
+function del(){
     let newoperation = operation.slice(0, operation.length - 1);
         if(newoperation.length === 0){
             operation = [];
@@ -145,4 +165,3 @@ del = ()=>{
             currentDisplay.innerText = operation;
         }
 };
-// btnSelector();

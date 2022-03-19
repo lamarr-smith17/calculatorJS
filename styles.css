@@ -7,17 +7,19 @@
 
 body {
     display: flex;
+    height: 100vh;
+    flex-direction: column;
     justify-content: center;
     align-content: center;
-    padding: 7%;
     background: linear-gradient(135deg,#CBFF4D, #6BAA75);
     
 }
 /* Calculator Body*/
 .container {
     display: flex;
-    border: 1px solid #000000;
-    height: auto;
+    align-content: center;
+    justify-content: center;
+    padding-top: 2%;
 }
 
 /*Display Container Styles*/
@@ -45,6 +47,7 @@ body {
 .btn-Container {
     display: grid;
     background-color: #313131;
+    border: 5px solid #000000;
     gap: .25em;
     grid-template-columns: repeat(4, 100px);
     grid-template-rows: repeat(6,100px);
@@ -108,4 +111,25 @@ body {
     grid-column-start:3;
     grid-column: span 2;
 }
-
+/*Footer Styles */
+footer {
+    background-color: #6BAA75;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    gap: 1em;
+    margin-top: auto;
+  }
+  #myName {
+    text-align: center;
+    align-self: center;
+  }
+  #gitLink {
+    background-color: transparent;
+    border: none;
+  }
+  #footer-text {
+    text-align: center;
+    align-self: center;
+    font-weight: bold;
+  }
