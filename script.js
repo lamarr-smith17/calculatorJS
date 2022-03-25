@@ -112,13 +112,6 @@ function evalute(){
             for (let j = i+1; j <= operation.length; j++){ // Moves the index to the first right-side value
                 if(operation[j] === '+' || operation[j] === '-' || operation[j]=== '*' || operation[j] === '/' ){
                     let z = operation[j];
-                    if (isNaN(opRight)){ // If the user presses the equal button before entering another number, it sets opRight equal to opLeft and does the operation
-                        opRight = opLeft;
-                        operation += opRight;
-                        let value = operate(z, opLeft, opRight);
-                        runT = value;
-                        return value;
-                    }
                     for (let a = j + 1; a < operation.length; a++){
                         if(operation[a] === '+' || operation[a] === '-' || operation[a]=== '*' || operation[a] === '/' ){ // Finds the next operator, points to the index, and it is then used to find the end
                             opRight = parseFloat(operation.slice(j+1, a))
@@ -127,6 +120,13 @@ function evalute(){
                             opRight = parseFloat(operation.slice(j+1));
                             break;
                         }
+                    }
+                    if (isNaN(opRight)){ // If the user presses the equal button before entering another number, it sets opRight equal to opLeft and does the operation
+                        opRight = opLeft;
+                        operation += opRight;
+                        let value = operate(z, opLeft, opRight);
+                        runT = value;
+                        return value;
                     }
                     opLeft = runT;
                     let value = operate(z, opLeft, opRight);
